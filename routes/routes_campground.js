@@ -153,8 +153,8 @@ var  express = require('express')
     });
 
     //DELETE ROUTES
-    router.delete("/:encodedName", middleware.checkCampgroundOwnership, function(req, res){
-        m_campground.findByEncodedNameAndRemove(req.params.encodedName, function(err){
+    router.delete("/:id", middleware.checkCampgroundOwnership, function(req, res){
+        m_campground.findByIdAndRemove(req.params.id, function(err){
             if(err){
                 res.redirect("/campground");
             } else {

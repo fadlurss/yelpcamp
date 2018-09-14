@@ -44,11 +44,11 @@ middlewareObj.checkCommentOwnership = function(req, res, next){
                 }
             }
         });
-    } else {
+      } else {
         req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
       }  
-    }
+}
 
 middlewareObj.verifyToken = function(req, res, next){
     var token = req.body.token || req.param('token') || req.headers['x-access-token'];

@@ -115,7 +115,8 @@ var  express = require('express')
             if(err){
                 res.redirect("/campground");
             } else {
-                res.render("v_campground/show", {panggil_id : hasil_pencarian_id[0]});
+                
+                res.render("v_campground/show", {campground : hasil_pencarian_id[0]});
             }
         });
     });

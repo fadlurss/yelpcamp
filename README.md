@@ -30,4 +30,14 @@ Kalau masih kelihatan teknologi server side nya oleh wappalyzer, penyebabnya ada
 ERROR LIST : 
 1. E11000 duplicate key error index in mongodb mongoose, SOLUTION ==> Or use db.users.dropIndexes() if you're making multiple index changes https://stackoverflow.com/questions/24430220/e11000-duplicate-key-error-index-in-mongodb-mongoose
 
-2. 
+ 
+
+
+
+##git command
+git branch : 
+1. git branch
+2. git checkout -b feature1
+3. git branch
+4. git checkout master
+5. klw mau merge, posisinya harus dalam keadaan master, lalu git merge feature1

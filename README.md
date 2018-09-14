@@ -34,7 +34,7 @@ ERROR LIST :
 
 
 
-##git command
+## git command
 git branch : 
 1. git branch
 2. git checkout -b feature1

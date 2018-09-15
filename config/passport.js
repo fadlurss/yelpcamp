@@ -4,6 +4,10 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy  = require('passport-twitter').Strategy;
 var GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
 var jwt              = require('jsonwebtoken');
+var randomstring     = require('randomstring');
+var async       = require('async');
+var nodemailer  = require('nodemailer');
+var crypto      = require('crypto');
 
 // load up the user model
 var User       = require('../models/user');
@@ -55,6 +59,13 @@ module.exports = function(passport) {
                 // if no user is found, return the message
                 if (!user)
                     return done(null, false, req.flash('loginMessage', 'No user found.'));
+
+                if(!user.local.activeReg)
+                    return done(null, false, req.flash('loginMessage', 'You must verify email address.'));
+                    // if (user.local.activeReg(false))
+                    // console.log(user.local.activeReg);
+                    // // eval(require('locus'));
+                    // return done(null, false, req.flash('loginMessage', 'You must verify email address.'));
 
                 if (!user.validPassword(password))
                     return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
@@ -120,7 +131,8 @@ module.exports = function(passport) {
                     if (user) {
                         return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
                     } else {
-
+                        var randomToken = randomstring.generate();
+                        
                         // create the user
                         var newUser            = new User();
                         // eval(require('locus'))
@@ -132,6 +144,8 @@ module.exports = function(passport) {
                         newUser.local.lastName  = lastName;
                         newUser.local.username  = username;
                         newUser.local.password  = newUser.generateHash(password);
+                        newUser.local.tokenReg  = randomToken;
+                        newUser.local.activeReg = false;
 
                         //create a token
                         var token = jwt.sign({id: newUser.local.id}, config.secret, {
@@ -147,6 +161,31 @@ module.exports = function(passport) {
 
                             return done(null, newUser, req.flash('success', 'Successfully signed up! Nice to meet you '+firstName+' '+lastName));
                         });
+
+                        var transporter = nodemailer.createTransport({
+                            service: 'gmail',
+                            auth: {
+                              user: 'fadlurss@gmail.com',
+                              pass: 'xtcbandung'
+                            }
+                          });
+                          
+                          var mailOptions = {
+                            from: 'fadlurss@gmail.com',
+                            to: newUser.local.email,
+                            subject: 'Verify your email yelpcamp',
+                            text: 'Hello, '+newUser.local.username+'. Thank you for register Yelpcamp, please verify your token.\n\n'+
+                                'Paste this to complete the process: '+newUser.local.tokenReg + '\n\n'+  
+                                'Then click on the following link http://' + req.headers.host + '/verify/ \n'
+                          };
+                          
+                          transporter.sendMail(mailOptions, function(error, info){
+                            if (error) {
+                              console.log(error);
+                            } else {
+                              console.log('Email sent: ' + info.response);
+                            }
+                          });
 
                         
                     }

@@ -166,7 +166,7 @@ module.exports = function(passport) {
                             service: 'gmail',
                             auth: {
                               user: 'fadlurss@gmail.com',
-                              pass: 'xtcbandung'
+                              pass: process.env.GMAILPW // GMAILPW=your password in terminal node app.js
                             }
                           });
                           

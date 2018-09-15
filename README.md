@@ -41,3 +41,4 @@ git branch :
 3. git branch
 4. git checkout master
 5. klw mau merge, posisinya harus dalam keadaan master, lalu git merge feature1
+6. update git per file : (git add .) kemudian git commit -m "your comment"

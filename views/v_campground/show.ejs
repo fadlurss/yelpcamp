@@ -17,13 +17,13 @@
                         <h4><%= panggil_id.name %></h4>
                         <h4 class="pull-right">Rp. <%= panggil_id.price %></h4>
                         
-                        Date : <%= panggil_id.created.toDateString() %> <br>
+                        Date : <%= moment(panggil_id.createdAt).fromNow() %> <br>
                         Submitted By  : <a href="/users/<%= panggil_id.author.id %>"><%= panggil_id.author.username %> </a>
                         <hr>
                         <p><%= panggil_id.description %></p> 
                         <% if(currentUser && (panggil_id.author.id.equals(currentUser._id))) { %>
                             <a class="btn btn-info" href="/campground/<%= panggil_id._id %>/edit">Edit Campground</a>
-                            <form class="delete" action="/campground/<%= panggil_id.encodedName %>?_method=DELETE" method="POST">
+                            <form class="delete" action="/campground/<%= panggil_id.id %>?_method=DELETE" method="POST">
                             <button class="btn btn-danger">Delete</button>
                         </form>
                       <% }  %>
@@ -39,7 +39,7 @@
                     <div class="col-md-12">
                         <% panggil_id.comments.forEach(function(comment){  %>  
                             <strong><%= comment.author.username %></strong> 
-                            <span class="pull-right">Time</span>
+                            <span class="pull-right"><%= moment(comment.createdAt).fromNow() %></span>
                             <p>
                                     <%= comment.content %>
                             </p>

@@ -20,7 +20,7 @@ var campgroundSchema = new mongoose.Schema({
         lastName : String,
         email : String,
     },
-    created : {type : Date, default: Date.now},
+    createdAt: { type: Date, default: Date.now },
     description : String,
     comments : [
         {

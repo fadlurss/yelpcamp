@@ -32,7 +32,7 @@ var  express = require('express')
             });
         } else {
             // get all campgrounds from DB
-            m_campground.find({}).skip((perPage * pageNumber) - perPage).limit(perPage).exec(function (err, allCampgrounds) {
+            m_campground.find({}).sort({created: -1}).skip((perPage * pageNumber) - perPage).limit(perPage).exec(function (err, allCampgrounds) {
                 m_campground.count().exec(function (err, count) {
                     if (err) {
                         console.log(err);
@@ -111,7 +111,7 @@ var  express = require('express')
 
     //SHOW ROUTES 
     router.get("/:encodedName", function(req,res){
-        m_campground.findByEncodedName(req.params.encodedName).populate("comments").exec(function(err, hasil_pencarian_id){
+        m_campground.findByEncodedName(req.params.encodedName).populate({path: "comments", options: {sort: {created: -1}}}).exec(function(err, hasil_pencarian_id){
             if(err){
                 res.redirect("/campground");
             } else {

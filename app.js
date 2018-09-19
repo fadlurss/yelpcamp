@@ -20,6 +20,7 @@ var express             = require('express'),
     commentRoutes       = require("./routes/routes_comment"),
     campgroundRoutes    = require("./routes/routes_campground"),
     indexRoutes         = require("./routes/routes");
+    adminRoutes         = require("./routes/routes_admin");
 
 require('dotenv').load();
 app = express();
@@ -66,6 +67,7 @@ app.use(function(req,res,next){ //buat melihat siapa yang login, ada di header w
 
 app.use("/", indexRoutes); //ini harus dibawah app.use(function(req,res,next))
 app.use("/campground", campgroundRoutes);
+app.use("/admin", adminRoutes);
 app.use("/campground/:id/comment", commentRoutes);
 
 

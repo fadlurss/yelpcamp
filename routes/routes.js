@@ -69,7 +69,7 @@ var crypto      = require('crypto');
 
         // process the signup form
         router.post('/signup', passport.authenticate('local-signup', {
-            successRedirect : '/campground', // redirect to the secure profile section
+            successRedirect : '/login', // redirect to the secure profile section
             failureRedirect : '/signup', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }));
@@ -223,12 +223,15 @@ var crypto      = require('crypto');
           },
           function(token, done) {
             User.findOne({ 'local.email': req.body.email }, function(err, user) {
+                console.log("dvfdvdfvdfbvdfbv "+user);
               if (!user) {
                 req.flash('error', 'No account with that email address exists.');
                 return res.redirect('/forgot');
               }
       
               user.resetPasswordToken = token;
+              console.log("TOKEN "+token);
+              console.log("TOKEN USER "+user.resetPasswordToken);
               user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
       
               user.save(function(err) {
@@ -268,34 +271,38 @@ var crypto      = require('crypto');
 
 
       router.get('/reset/:token', function(req, res) {
-        User.findOne({ 'local.resetPasswordToken': req.params.token, 'local.resetPasswordExpires': { $gt: Date.now() } }, function(err, cari) {
+        User.findOne({ 'local.resetPasswordToken': req.params.token, 'local.resetPasswordExpires': { $gt: Date.now()+1400000 } }, function(err, cari) {
           
-          
-          res.json({token: req.params.token});
-          console.log("HASILNYA "+cari);
+          res.render("v_access/reset", {token: req.params.token});
+        //   res.json({token: req.params.token});
+          console.log("HASILNYA "+req.params.token);
         });
       });
 
     router.post('/reset/:token', function(req, res) {
         async.waterfall([
             function(done) {
-                User.findOne({ 'local.resetPasswordToken': req.params.token, 'local.resetPasswordExpires' : { $gt: Date.now() } }, function(err, user) {
-                    if (!user) {
-                    req.flash('error', 'Password reset token is invalid or has expired.');
-                    return res.redirect('back');
-                    }
-                    console.log("Hasil post "+user);
+                User.findOne({ 'local.resetPasswordToken': req.params.token, 'local.resetPasswordExpires' : { $gt: Date.now()+1400000 } }, function(err, user) {
+                    console.log("Hasil post token "+req.params.token);
+                    // console.log(" lOCAL "+local.email+" password "+req.body.password);
                     if(req.body.password === req.body.confirm){
-                        user.local.setPassword(req.body.password, function(err){
-                            user.local.resetPasswordToken = undefined;
-                            user.local.resetPasswordExpires = undefined;
 
-                        user.save(function(err){
-                            req.logIn(user.local, function(err){
-                                done(err, user);
-                            });
-                            });
-                        });
+
+                        // var password = User.update({
+                        //     'local.password' : req.body.password
+                        // });
+
+
+                        // user.local.setPassword(req.body.password, function(err){
+                        //     user.local.resetPasswordToken = undefined;
+                        //     user.local.resetPasswordExpires = undefined;
+
+                        // user.save(function(err){
+                        //     req.logIn(user.local, function(err){
+                        //         done(err, user);
+                        //     });
+                        //     });
+                        // });
                     } else {
                         req.flash('error', 'Password do not match');
                         return res.redirect('back');

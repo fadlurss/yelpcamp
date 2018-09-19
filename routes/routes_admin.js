@@ -6,17 +6,14 @@ var  express = require('express')
      middleware = require("../middleware");
 
      router.get("/", middleware.isLoggedIn , (req,res)=>{
-     	Campgrounds.find({}).populate("comments").sort({created: -1}).exec(function(err, campgrounds){
-            res.render("v_admin/index", {campgrounds : campgrounds});
-            console.log();
+        Users.findById(req.user.id, (err, foundUser)=>{
+            console.log("user saat ini "+req.user.id);
+     	Campgrounds.find().where('author.id').equals(foundUser.id).populate("comments").sort({created: -1}).exec(function(err, campgrounds){
+            res.render("v_admin/index", {user: foundUser, campgrounds : campgrounds});
+            console.log("user terdaftar "+foundUser.id);
          });
-        // Campgrounds.find({author: req.user.id})
-        //     .populate('comments')
-        //     .then(campgrounds=>{
-    
-        //         res.render("v_admin/index", {campgrounds : campgrounds});
-        //     });
-    
+        });
+       
      });
 
      router.get('/:id', (req, res)=>{

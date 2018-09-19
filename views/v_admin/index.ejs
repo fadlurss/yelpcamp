@@ -31,22 +31,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <% campgrounds.forEach(function(hasil){ %>
+                               <% campgrounds.forEach(function(hasil){ %>
                                 <tr>
                                     <td><%= hasil.name %></td>
-                                    <td><%= hasil.price%></td>
-                                    <td class="center"><%= hasil.author.username %></td>
-                                    <td class="center"><%= moment (hasil.created).fromNow() %></td>
-                                    <td class="center">
-                                    <% hasil.comments.forEach(function(hasi){ %>
-                                        <p> <%= hasi.author.username %> : <%= hasi.content %> </p>
-                                    <% }); %>
+                                    <td><%= hasil.price %></td>
+                                    <td><%= hasil.author.username %></td>
+                                    <td><%= moment (hasil.created).fromNow() %></td>
+                                    <td>
+                                        <% hasil.comments.forEach(function(komen){ %>
+                                            <p> <%= komen.author.username %> : <%= komen.content %> </p>
+                                        <% }); %>
                                     </td>
+                                    
                                     <td><%= hasil.description %></td>
-                                </tr>
-                                
+                                </tr>     
                                 <% }); %>
-                               </tbody>
+                            </tbody>
                         </table>
                        
                     </div>

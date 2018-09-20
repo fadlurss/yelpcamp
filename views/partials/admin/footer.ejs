@@ -15,6 +15,13 @@
  <!-- Custom Theme JavaScript -->
  <script src="/js/sb-admin-2.js"></script>
 
+ <!-- Bootstrap Switch -->
+ <script src="/js/bootstrap-switch.min.js"></script>
+
+ <!-- Toaster JS -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
  <!-- Page-Level Demo Scripts - Tables - Use for reference -->
  <script>
  $(document).ready(function() {
@@ -22,6 +29,33 @@
          responsive: true
      });
  });
+
+ $("[name='approveComment']").bootstrapSwitch();
+
+//  $(document).ready(() => {
+//     $("[name='approveComment']").on('switchChange.bootstrapSwitch', (e, data)=>{
+//         console.log("IT WORKS");
+//     });
+//  });
+
+  $(document).ready(()=>{
+    $("[name='approveComment']").on('switchChange.bootstrapSwitch', function(e, data){
+
+        var id = $(this).attr('data-id');
+        // const id = $(this);
+        // console.log(id);
+
+        $.ajax({
+            type: "POST",
+            url : '/admin/comments/approve-comment',
+            data : {id: id, approveComment: data},
+            cache : false,
+            success: function(data){
+                toastr.success(`Comment with id ${data._id} was updated`);
+            }
+        });
+    });
+});
  </script>
 
 </body>

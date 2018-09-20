@@ -111,7 +111,7 @@ var  express = require('express')
 
     //SHOW ROUTES 
     router.get("/:encodedName", function(req,res){
-        m_campground.findByEncodedName(req.params.encodedName).populate({path: "comments", options: {sort: {created: -1}}}).exec(function(err, hasil_pencarian_id){
+        m_campground.findByEncodedName(req.params.encodedName).populate({path: "comments",match: {approveComment: true}, options: {sort: {created: -1}}}).exec(function(err, hasil_pencarian_id){
             if(err){
                 res.redirect("/campground");
             } else {

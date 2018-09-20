@@ -42,7 +42,7 @@ router.post("/", isLoggedIn, function(req, res){
                campground.comments.push(comment);
                campground.save();
                console.log(campground.encodedName);
-               req.flash('success', 'Created a comment!');
+               req.flash('success', 'Your comment will reviewed in a moment in a hours');
                res.redirect('/campground/'+campground.encodedName);
            }
         });

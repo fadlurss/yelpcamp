@@ -4,6 +4,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy  = require('passport-twitter').Strategy;
 var GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
 var jwt              = require('jsonwebtoken');
+var querystring = require('querystring');
 
 // load up the user model
 var User       = require('../models/user');
@@ -58,6 +59,8 @@ module.exports = function(passport) {
 
                 if (!user.validPassword(password))
                     return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
+
+                
 
                 // all is well, return user
                 else
@@ -416,5 +419,30 @@ module.exports = function(passport) {
         });
 
     }));
+
+
+    function accountExists (email) {
+        User.findOne({ 'local.email' :  email }, function(err, user) {
+            var emails = user;
+            console.log(emails);
+            // var emails = ['you@email.com', 'alex@email.com', 'admin@email.com'];
+            return emails.indexOf(email) > -1;
+        }); 
+    }
+
+    
+    var server =  function(req,res){
+        var params = req.url.split('?')[1];
+        var data = querystring.parse(params);
+        var email = data.email;
+
+        if(accountExists(email)){
+            res.write('"');
+        } else {
+            res.write('"true"');
+        }
+    };
+
+
 
 };

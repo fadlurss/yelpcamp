@@ -13,6 +13,7 @@ var express             = require('express'),
     campground          = require('./models/campground'),
     comment             = require('./models/comment'),
     user                = require('./models/user'),
+    path                = require('path'),
     rateLimit           = require("express-rate-limit"),
     cors                = require('cors'),
     validator           = require('express-validator'),
@@ -53,6 +54,7 @@ limiter = rateLimit({
   });
 app.use(limiter);
 app.use(express.static(__dirname + "/public"));
+app.use(express.static(path.join(__dirname, "js")));
 
 app.use(function(req,res,next){ //buat melihat siapa yang login, ada di header welcome back!! semacam session bisa mengeluarkan email 
     res.locals.currentUser = req.user;
@@ -60,6 +62,7 @@ app.use(function(req,res,next){ //buat melihat siapa yang login, ada di header w
     res.locals.error = req.flash("error"); //utk mengirim pesan ke semua router
     res.locals.success = req.flash("success");
     res.locals.pesan_cari = req.flash("pesan_cari");
+    res.setHeader("Content-Type", "application/json");
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();

@@ -1,3 +1,14 @@
+#problem in branch social-login not fixed : 
+MongoError: E11000 duplicate key error collection: yelpcamp_v15.users index: local.email_1 dup key: { : null }
+    at Function.create (/Users/muhammadalfifadhlur/Documents/yelpcamp/node_modules/mongodb-core/lib/error.js:43:12)
+    at toError (/Users/muhammadalfifadhlur/Documents/yelpcamp/node_modules/mongodb/lib/utils.js:149:22)
+    at coll.s.topology.insert (/Users/muhammadalfifadhlur/Documents/yelpcamp/node_modules/mongodb/lib/operations/collection_ops.js:828:39)
+    at /Users/muhammadalfifadhlur/Documents/yelpcamp/node_modules/mongodb-core/lib/connection/pool.js:531:18
+    at _combinedTickCallback (internal/process/next_tick.js:131:7)
+    at process._tickCallback (internal/process/next_tick.js:180:9)
+
+
+
 Sampai section 33
 berhubungan dengan login yelpcamp
 

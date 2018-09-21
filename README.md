@@ -1,11 +1,11 @@
-#git master : 
+## git master : 
 1. Feature Comments-showpage branch included
 2. Feature jQuery branch included
 3. Feature Pagination branch included
 4. Feature Sorting branch included
 
 
-#ISSUES branch social-login NOT FIXED : 
+## Problem social-login : 
 MongoError: E11000 duplicate key error collection: yelpcamp_v15.users index: local.email_1 dup key: { : null }
     at Function.create (/Users/muhammadalfifadhlur/Documents/yelpcamp/node_modules/mongodb-core/lib/error.js:43:12)
     at toError (/Users/muhammadalfifadhlur/Documents/yelpcamp/node_modules/mongodb/lib/utils.js:149:22)

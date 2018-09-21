@@ -3,35 +3,82 @@ var  express = require('express')
      m_campground = require("../models/campground")
      middleware = require("../middleware")
 
-    //INDEX  ROUTES --> index show all campground
-    router.get("/", function(req,res){
-        // eval(require('locus'));
-        var tidak_ada_hasil = '';
-        if(req.query.search){
-            var regex = new RegExp(escapeRegex(req.query.search), 'gi');
-            m_campground.find({name : regex}, function(err, list_campground){
-                if(err){
-                    console.log(err);
-                } else {
-                    if(list_campground.length < 1){
-                        req.flash("pesan_cari", "Data not found");
-                        return res.redirect("/campground");
+
+     router.get("/", function(req, res){
+        var perPage = 8;
+        var pageQuery = parseInt(req.query.page);
+        var pageNumber = pageQuery ? pageQuery : 1;
+        var noMatch = null;
+        if(req.query.search) {
+            const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+            m_campground.find({name: regex}).skip((perPage * pageNumber) - perPage).limit(perPage).exec(function (err, allCampgrounds) {
+                m_campground.count({name: regex}).exec(function (err, count) {
+                    if (err) {
+                        console.log(err);
+                        res.redirect("back");
+                    } else {
+                        if(allCampgrounds.length < 1) {
+                            noMatch = "No campgrounds match that query, please try again.";
+                        }
+                        res.render("v_campground/index", {
+                            campgrounds: allCampgrounds,
+                            current: pageNumber,
+                            pages: Math.ceil(count / perPage),
+                            noMatch: noMatch,
+                            search: req.query.search
+                        });
                     }
-                    res.render("v_campground/index", {result_campground : list_campground});
-                }
+                });
             });
         } else {
-            m_campground.find({}, function(err, list_campground){
-                if(err){
-                    console.log(err);
-                } else {
-                    console.log(req.user);
-                    res.render("v_campground/index", {result_campground : list_campground ,tidak_ada_hasil  :tidak_ada_hasil});
-                    
-                }
+            // get all campgrounds from DB
+            m_campground.find({}).sort({created: -1}).skip((perPage * pageNumber) - perPage).limit(perPage).exec(function (err, allCampgrounds) {
+                m_campground.count().exec(function (err, count) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        res.render("v_campground/index", {
+                            campgrounds: allCampgrounds,
+                            current: pageNumber,
+                            pages: Math.ceil(count / perPage),
+                            noMatch: noMatch,
+                            search: false
+                        });
+                    }
+                });
             });
         }
     });
+    
+    // //INDEX  ROUTES --> index show all campground
+    // router.get("/", function(req,res){
+    //     // eval(require('locus'));
+    //     var tidak_ada_hasil = '';
+    //     if(req.query.search){
+    //         var regex = new RegExp(escapeRegex(req.query.search), 'gi');
+    //         m_campground.find({name : regex}, function(err, list_campground){
+    //             if(err){
+    //                 console.log(err);
+    //             } else {
+    //                 if(list_campground.length < 1){
+    //                     req.flash("pesan_cari", "Data not found");
+    //                     return res.redirect("/campground");
+    //                 }
+    //                 res.render("v_campground/index", {result_campground : list_campground});
+    //             }
+    //         });
+    //     } else {
+    //         m_campground.find({}, function(err, list_campground){
+    //             if(err){
+    //                 console.log(err);
+    //             } else {
+    //                 console.log(req.user);
+    //                 res.render("v_campground/index", {result_campground : list_campground ,tidak_ada_hasil  :tidak_ada_hasil});
+                    
+    //             }
+    //         });
+    //     }
+    // });
 
     //NEW ROUTES tambah campground baru klw sudah login, krn pakai function isLoggedIn
     router.get("/new", middleware.isLoggedIn ,  function(req,res){
@@ -64,11 +111,12 @@ var  express = require('express')
 
     //SHOW ROUTES 
     router.get("/:encodedName", function(req,res){
-        m_campground.findByEncodedName(req.params.encodedName).populate("comments").exec(function(err, hasil_pencarian_id){
+        m_campground.findByEncodedName(req.params.encodedName).populate({path: "comments",match: {approveComment: true}, options: {sort: {created: -1}}}).exec(function(err, hasil_pencarian_id){
             if(err){
                 res.redirect("/campground");
             } else {
-                res.render("v_campground/show", {panggil_id : hasil_pencarian_id[0]});
+                
+                res.render("v_campground/show", {campground : hasil_pencarian_id[0]});
             }
         });
     });
@@ -105,8 +153,8 @@ var  express = require('express')
     });
 
     //DELETE ROUTES
-    router.delete("/:encodedName", middleware.checkCampgroundOwnership, function(req, res){
-        m_campground.findByEncodedNameAndRemove(req.params.encodedName, function(err){
+    router.delete("/:id", middleware.checkCampgroundOwnership, function(req, res){
+        m_campground.findByIdAndRemove(req.params.id, function(err){
             if(err){
                 res.redirect("/campground");
             } else {

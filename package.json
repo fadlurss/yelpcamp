@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "6": "0.0.1",
+    "@fortawesome/fontawesome-free": "^5.3.1",
     "async": "^2.6.1",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
@@ -28,6 +29,7 @@
     "helmet": "^3.13.0",
     "hide-powered-by": "^1.0.0",
     "hpp": "^0.2.2",
+    "jquery-validation": "^1.18.0",
     "jsonwebtoken": "^8.3.0",
     "locus": "^2.0.1",
     "method-override": "^3.0.0",

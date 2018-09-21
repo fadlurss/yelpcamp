@@ -8,6 +8,7 @@ var nodemailer  = require('nodemailer');
 var crypto      = require('crypto');
 
 
+
     // show the home page (will also have our login links)
     router.get('/', function(req, res) {
         res.redirect("/campground");
@@ -42,6 +43,9 @@ var crypto      = require('crypto');
         req.flash("success", "You successfull logout!"); // pertama dari sini, trs dikirim ke app.js, trs dikirim ke header
         res.redirect('/campground');
     });
+
+
+    router.get('/latihan', (req,res)=>{ res.render('v_access/latihan'); }); 
 
 // =============================================================================
 // AUTHENTICATE (FIRST LOGIN) ==================================================

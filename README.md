@@ -1,3 +1,10 @@
+#git master : 
+1. Comments-showpage branch included
+2. jQuery branch included
+3. Pagination branch included
+4. Sorting branch included
+
+
 Sampai section 33
 berhubungan dengan login yelpcamp
 
@@ -42,3 +49,13 @@ git branch :
 4. git checkout master
 5. klw mau merge, posisinya harus dalam keadaan master, lalu git merge feature1
 6. update git per file : (git add .) kemudian git commit -m "your comment"
+
+
+
+MongoError: E11000 duplicate key error collection: yelpcamp_v15.users index: local.email_1 dup key: { : null }
+    at Function.create (/Users/muhammadalfifadhlur/Documents/yelpcamp/node_modules/mongodb-core/lib/error.js:43:12)
+    at toError (/Users/muhammadalfifadhlur/Documents/yelpcamp/node_modules/mongodb/lib/utils.js:149:22)
+    at coll.s.topology.insert (/Users/muhammadalfifadhlur/Documents/yelpcamp/node_modules/mongodb/lib/operations/collection_ops.js:828:39)
+    at /Users/muhammadalfifadhlur/Documents/yelpcamp/node_modules/mongodb-core/lib/connection/pool.js:531:18
+    at _combinedTickCallback (internal/process/next_tick.js:131:7)
+    at process._tickCallback (internal/process/next_tick.js:180:9)

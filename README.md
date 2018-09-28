@@ -3,6 +3,7 @@
 2. Feature jQuery branch included
 3. Feature Pagination branch included
 4. Feature Sorting branch included
+5. Feature Category branch included
 
 
 ## Problem social-login : 

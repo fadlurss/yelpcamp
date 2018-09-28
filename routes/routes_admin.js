@@ -3,6 +3,7 @@ router = express.Router();
 Campgrounds = require("../models/campground");
 Comments = require("../models/comment");
 Users = require("../models/user");
+Categories = require('../models/categories');
 middleware = require("../middleware");
 
 //Get all campgrounds to admin
@@ -41,6 +42,13 @@ router.get("/comments", function(req,res){
             console.log("user terdaftar " + foundUser.id);
           });
       });
+});
+
+
+router.get("/categories", function(req,res){
+  Categories.find({}, function(err, hasil_categories){
+    res.render("v_admin/categories", {hasil_categories: hasil_categories});
+  });
 });
 
 

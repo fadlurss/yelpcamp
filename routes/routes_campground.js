@@ -1,6 +1,7 @@
 var  express = require('express')
      router = express.Router()
      m_campground = require("../models/campground")
+     Categories = require("../models/categories")
      middleware = require("../middleware")
 
 
@@ -32,7 +33,7 @@ var  express = require('express')
             });
         } else {
             // get all campgrounds from DB
-            m_campground.find({}).sort({created: -1}).skip((perPage * pageNumber) - perPage).limit(perPage).exec(function (err, allCampgrounds) {
+            m_campground.find({}).sort({created: -1}).skip((perPage * pageNumber) - perPage).populate("categories").limit(perPage).exec(function (err, allCampgrounds) {
                 m_campground.count().exec(function (err, count) {
                     if (err) {
                         console.log(err);
@@ -82,7 +83,9 @@ var  express = require('express')
 
     //NEW ROUTES tambah campground baru klw sudah login, krn pakai function isLoggedIn
     router.get("/new", middleware.isLoggedIn ,  function(req,res){
-        res.render("v_campground/new");
+        Categories.find({}, function(err,categories){
+            res.render("v_campground/new", {categories : categories});
+        });
     });
 
     //CREATE ROUTES
@@ -91,12 +94,13 @@ var  express = require('express')
         var encodedName = req.body.name.split(' ').join('-');
         var image = req.body.image;
         var description = req.body.description;
+        var categories = req.body.categories;
         var price = req.body.price;
         var author = {
             id : req.user._id,
             username : req.body.username
         }
-        var newCampground = {name : name, encodedName : encodedName, image : image, description : description, author : author, price : price};
+        var newCampground = {name : name, encodedName : encodedName, image : image, categories: categories, description : description, author : author, price : price};
         m_campground.create(newCampground, function(err, input_blog_baru){
             if(err){//jika gagal balik ke form new
                 res.render("v_campground/new");
@@ -111,7 +115,7 @@ var  express = require('express')
 
     //SHOW ROUTES 
     router.get("/:encodedName", function(req,res){
-        m_campground.findByEncodedName(req.params.encodedName).populate({path: "comments",match: {approveComment: true}, options: {sort: {created: -1}}}).exec(function(err, hasil_pencarian_id){
+        m_campground.findByEncodedName(req.params.encodedName).populate({path: "comments",match: {approveComment: true}, options: {sort: {created: -1}}}).populate("categories").exec(function(err, hasil_pencarian_id){
             if(err){
                 res.redirect("/campground");
             } else {
@@ -124,7 +128,9 @@ var  express = require('express')
     //EDIT ROUTES
     router.get("/:id/edit",middleware.checkCampgroundOwnership, function(req,res){
             m_campground.findById(req.params.id, function(err, edit_id){
-                res.render("v_campground/edit", {halaman_edit_id : edit_id});
+                Categories.find({}, function(err,categories){
+                    res.render("v_campground/edit", {halaman_edit_id : edit_id, categories:categories});
+                }); 
             });
     });
 
@@ -136,11 +142,12 @@ var  express = require('express')
         var image = req.body.image;
         var description = req.body.description;
         var price = req.body.price;
+        var categories = req.body.categories;
         var author = {
             id : req.user._id,
             username : req.body.username
         }
-        var updateCampground = {name : name, encodedName : encodedName, image : image, description : description, author : author, price : price};
+        var updateCampground = {name : name, encodedName : encodedName,categories : categories, image : image, description : description, author : author, price : price};
         m_campground.findByIdAndUpdate(req.params.id, updateCampground, function(err, update_id){
             console.log("HASILNYA "+updateCampground.encodedName);
             if(err){

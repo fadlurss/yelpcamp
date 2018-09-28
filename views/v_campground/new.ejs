@@ -12,6 +12,14 @@
                 <div class="form-group">
                         <input type="text" class="form-control" readonly name="username" value="<%= currentUser.local.username %> <%= currentUser.google.name %> <%= currentUser.facebook.name %>">
                 </div>
+                <div class="form-group">
+                        <label for="">Category</label>
+                        <select name="categories" id="" class="form-control" id="">
+                                <% categories.forEach(function(hasil){ %>
+                                <option value="<%= hasil.id %>"><%= hasil.name %></option>
+                                <% }); %>
+                        </select>
+                </div>
                 <label for="">Price Campground</label>
                 <div class="form-group">
                         <input type="number" class="form-control" name="price" placeholder="Price" min="50.000" step="50.000">

@@ -22,6 +22,10 @@ var campgroundSchema = new mongoose.Schema({
     },
     created : {type : Date, default: Date.now},
     description : String,
+    categories : {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Categories'
+    },
     comments : [
         {
             type : mongoose.Schema.Types.ObjectId,

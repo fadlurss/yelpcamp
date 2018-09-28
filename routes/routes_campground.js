@@ -119,8 +119,9 @@ var  express = require('express')
             if(err){
                 res.redirect("/campground");
             } else {
-                
-                res.render("v_campground/show", {campground : hasil_pencarian_id[0]});
+            Categories.find({}, function(err, categories){
+                res.render("v_campground/show", {categories: categories,campground : hasil_pencarian_id[0]});
+            });
             }
         });
     });

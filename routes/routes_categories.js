@@ -22,20 +22,31 @@ var  express = require('express')
 
 
     router.get('/:id', function(req, res) {
+        var perPage = 8;
+        var pageQuery = parseInt(req.query.page);
+        var pageNumber = pageQuery ? pageQuery : 1;
+        var noMatch = null;
         Categories.findById(req.params.id, function(err, foundCategories){
             if(err){
                 req.flash("error", "Something went wrong");
                 res.redirect("/campground");
             }//jika berhasil menemukan user, maka cari campground milik user
-            Campground.find().where('categories').equals(foundCategories.id).exec(function(err, campgrounds){
-                if(err){
-                    req.flash("error", "Something went wrong");
-                    res.redirect("/campground");
-                    
-                } //jika ketemu, tampilkan list campground beserta profil user
-                // console.log("User id saat ini "+req.user._id+" User google "+campgrounds[0].author.id);
-                res.render('v_categories/categories',{categories: foundCategories, campgrounds : campgrounds});
-                console.log("hasil categories "+foundCategories.id);
+            Campground.find().sort({created: -1}).skip((perPage * pageNumber) - perPage).where('categories').equals(foundCategories.id).exec(function(err, campgrounds){
+                Campground.count().exec(function(err,count){
+                    if(err){
+                        req.flash("error", "Something went wrong");
+                        res.redirect("/campground");
+                        
+                    } //jika ketemu, tampilkan list campground beserta profil user
+                    // console.log("User id saat ini "+req.user._id+" User google "+campgrounds[0].author.id);
+                    res.render('v_categories/categories',{
+                        categories: foundCategories,
+                        campgrounds : campgrounds,
+                        current: pageNumber,
+                        pages: Math.ceil(count / perPage)
+                    });
+                });
+                
             });
         });
         

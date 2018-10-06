@@ -11,37 +11,6 @@
 
     <title>Yelpcamp Admin</title>
  
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.js"></script>
-    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-    <script src="//cdn.datatables.net/tabletools/2.2.4/js/dataTables.tableTools.min.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/tabletools/2.2.4/css/dataTables.tableTools.css">
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var table = $('#datatable').dataTable();
-            var tableTools = new $.fn.dataTable.TableTools(table, {
-                'sSwfPath': '//cdn.datatables.net/tabletools/2.2.4/swf/copy_csv_xls_pdf.swf',
-                'aButtons': ['copy', {
-                    'sExtends': 'print',
-                    'bShowAll': false
-                },
-                'csv',
-                {
-                    'sExtends': 'xls',
-                    'sFilename': 'Data.xls',
-                    'sButtonText': 'Save to Excel'
-                },
-                {
-                    'sExtends': 'pdf',
-                    'bFooter': false
-                }
-                ]
-            });
-            $(tableTools.fnContainer()).insertBefore('#datatable_wrapper');
-        });
-    </script>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -54,6 +23,10 @@
 
     <!-- DataTables Responsive CSS -->
     <link href="/stylesheets/dataTables.responsive.css" rel="stylesheet">
+    
+
+    <!-- <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/tabletools/2.2.4/css/dataTables.tableTools.css"> -->
 
     <!-- Custom CSS -->
     <link href="/stylesheets/sb-admin-2.css" rel="stylesheet">

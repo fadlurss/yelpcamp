@@ -3,7 +3,10 @@
 2. Feature jQuery branch included
 3. Feature Pagination branch included
 4. Feature Sorting branch included
+5. Feature Category branch included
 
+## new feature : 
+1. Export to excel and pdf, more info in git branch report
 
 ## Problem social-login : 
 MongoError: E11000 duplicate key error collection: yelpcamp_v15.users index: local.email_1 dup key: { : null }

@@ -23,6 +23,7 @@ var express             = require('express'),
     indexRoutes         = require("./routes/routes");
     adminRoutes         = require("./routes/routes_admin");
     categoriesRoutes    = require("./routes/routes_categories");
+    pasienRoutes        = require("./routes/routes_pasien");
 
 require('dotenv').load();
 app = express();
@@ -74,6 +75,7 @@ app.use("/campground", campgroundRoutes);
 app.use("/admin", adminRoutes);
 app.use("/campground/:id/comment", commentRoutes);
 app.use("/categories",categoriesRoutes);
+app.use("/pasien", pasienRoutes);
 
 
 app.get("*", function(req,res){

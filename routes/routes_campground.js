@@ -96,11 +96,13 @@ var  express = require('express')
         var description = req.body.description;
         var categories = req.body.categories;
         var price = req.body.price;
+        var start_date = req.body.start_date;
+        var end_date = req.body.end_date;
         var author = {
             id : req.user._id,
             username : req.body.username
         }
-        var newCampground = {name : name, encodedName : encodedName, image : image, categories: categories, description : description, author : author, price : price};
+        var newCampground = {name : name, encodedName : encodedName, image : image, categories: categories, description : description, author : author, price : price, start_date: start_date, end_date: end_date};
         m_campground.create(newCampground, function(err, input_blog_baru){
             if(err){//jika gagal balik ke form new
                 res.render("v_campground/new");

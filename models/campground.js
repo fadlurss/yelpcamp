@@ -21,6 +21,8 @@ var campgroundSchema = new mongoose.Schema({
         email : String,
     },
     created : {type : Date, default: Date.now},
+    start_date : Date,
+    end_date : Date,
     description : String,
     categories : {
         type: mongoose.Schema.Types.ObjectId,

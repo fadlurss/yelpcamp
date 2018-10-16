@@ -30,6 +30,7 @@
     "hide-powered-by": "^1.0.0",
     "hpp": "^0.2.2",
     "jquery-validation": "^1.18.0",
+    "js-autocomplete": "^1.0.4",
     "jsonwebtoken": "^8.3.0",
     "locus": "^2.0.1",
     "method-override": "^3.0.0",

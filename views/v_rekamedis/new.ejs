@@ -1,0 +1,45 @@
+<% include ../partials/admin/header %>
+<div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Tambah Pasien</h1>
+            
+            </div>
+           
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Tambah Pasien
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <form class="form-horizontal" role="form" action="/pasien/new" method="POST" id="tambah_pasien">
+                            <div class="form-group">
+                                <label for="" class="col-sm-3">Nama Lengkap pasien</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="nama_lengkap" minlength="2" maxlength="30" placeholder="" class="form-control">
+                                </div>
+                            </div>
+                            <form onsubmit="return false;" class="pure-form" style="border-top: 1px solid #eee;border-bottom:1px solid #eee;background:#fafafa;margin:30px 0;padding:20px 10px;text-align:center">
+                                <input id="hero-demo" autofocus type="text" name="q" placeholder="Programming languages ..." style="width:100%;max-width:600px;outline:0">
+                            </form>
+                            <div class="form-group">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <input type="submit" name="submit" class="btn btn-info btn-block">
+                                </div>
+                            </div>
+                        </form>
+                       
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>     
+</div>
+<% include ../partials/admin/footer %>

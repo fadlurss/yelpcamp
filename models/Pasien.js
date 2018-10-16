@@ -14,8 +14,7 @@ var pasienSchema = new mongoose.Schema({
         type: String,
     },
     nomor_hp : {
-        type: String,
-        unique: true
+        type: String
     },
     nama_ibu_kandung: {
         type: String

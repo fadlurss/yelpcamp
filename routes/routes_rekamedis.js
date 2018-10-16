@@ -22,7 +22,13 @@ var  express = require('express')
         });
         
     });
-
+   router.post('/cariibu',(req,res)=>{
+    //    console.log(req.body.np);
+        Pasien.find({'nama_lengkap':req.body.np},(e,r)=>{
+            console.log(r);
+            res.json(r);
+        });
+   });
     
 
      module.exports = router;

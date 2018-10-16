@@ -175,35 +175,13 @@ messages: {
 
 <script src="/js/auto-complete.js"></script>
     <script>
-        var demo1 = new autoComplete({
-            selector: '#hero-demo',
-            minChars: 1,
-            source: function(term, suggest){
-                term = term.toLowerCase();
-                var contoh = $.getJSON("http://localhost:5000/rekamedis/contoh").then((res)=>{
-                    var choices = res;
-                    console.log(choices);
-                    // var choices = ['ActionScript', 'AppleScript', 'Asp', 'Assembly', 'BASIC', 'Batch', 'C', 'C++', 'CSS', 'Clojure', 'COBOL', 'ColdFusion', 'Erlang', 'Fortran', 'Groovy', 'Haskell', 'HTML', 'Java', 'JavaScript', 'Lisp', 'Perl', 'PHP', 'PowerShell', 'Python', 'Ruby', 'Scala', 'Scheme', 'SQL', 'TeX', 'XML'];
-                    console.log(choices);
-                    var suggestions = [];
-                    for (i=0;i<choices.length;i++)
-                        if (~choices[i].toLowerCase().indexOf(term)) suggestions.push(choices[i]);
-                    suggest(suggestions);
-                });
-                
-            }
-        });
-
         var demo2 = new autoComplete({
-            selector: '#input_nama',
+            selector: '#nama_lengkap',
             minChars: 1,
             source: function(term, suggest){
                 term = term.toLowerCase();
                 var contoh = $.getJSON("http://localhost:5000/rekamedis/contoh").then((res)=>{
                     var choices = res;
-                    console.log(choices);
-                    // var choices = ['ActionScript', 'AppleScript', 'Asp', 'Assembly', 'BASIC', 'Batch', 'C', 'C++', 'CSS', 'Clojure', 'COBOL', 'ColdFusion', 'Erlang', 'Fortran', 'Groovy', 'Haskell', 'HTML', 'Java', 'JavaScript', 'Lisp', 'Perl', 'PHP', 'PowerShell', 'Python', 'Ruby', 'Scala', 'Scheme', 'SQL', 'TeX', 'XML'];
-                    console.log(choices);
                     var suggestions = [];
                     for (i=0;i<choices.length;i++)
                         if (~choices[i].toLowerCase().indexOf(term)) suggestions.push(choices[i]);
@@ -212,6 +190,36 @@ messages: {
                 
             }
         });
+        
+       $("#nama_pasien").on("change",function(){
+           np = $(this).val();
+           $.post("http://localhost:5000/rekamedis/cariibu",{np:np}).then((r)=>{
+               console.log(r);
+               if (r.length > 0) {
+                   $("#nama_ibu").val(r[0].nama_ibu_kandung);
+               }else{
+                   alert("Nama Tidak Ditemukan");
+               }
+           });
+       });
+
+        var btn = document.getElementById('hasil');
+        btn.addEventListener('click',function(e){
+            id=nama_lengkap.value;
+            text=textnya.value;
+            contoh_id = contoh_id.value;
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                    console.log(thi.responseText);
+                }
+            };
+            xhttp.open("POST", "http://localhost:5000/rekamedis/contoh/", true);
+            xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xhttp.send("nama_lengkap="+id+"&textnya="+text+"contoh_id"+contoh_id);
+        })
+
+
     </script>
 </body>
 

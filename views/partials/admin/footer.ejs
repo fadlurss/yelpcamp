@@ -203,21 +203,19 @@ messages: {
            });
        });
 
-        var btn = document.getElementById('hasil');
-        btn.addEventListener('click',function(e){
-            id=nama_lengkap.value;
-            text=textnya.value;
-            contoh_id = contoh_id.value;
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function(){
-                if(this.readyState == 4 && this.status == 200){
-                    console.log(thi.responseText);
-                }
-            };
-            xhttp.open("POST", "http://localhost:5000/rekamedis/contoh/", true);
-            xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-            xhttp.send("nama_lengkap="+id+"&textnya="+text+"contoh_id"+contoh_id);
-        })
+       $("#nama_pasien").on("change",function(){
+           np = $(this).val();
+           $.post("http://localhost:5000/rekamedis/cariibu",{np:np}).then((r)=>{
+               console.log(r);
+               if (r.length > 0) {
+                   $("#nomor_bpjs").val(r[0].nomor_bpjs);
+               }else{
+                   alert("Nama Tidak Ditemukan");
+               }
+           });
+       });
+
+       
 
 
     </script>

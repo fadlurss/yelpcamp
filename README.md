@@ -4,14 +4,11 @@
 3. Feature Pagination branch included
 4. Feature Sorting branch included
 5. Feature Category branch included
-<<<<<<< HEAD
-=======
 6. Feature Start date campground to end date campground
 7. Feature Report excel, pdf
->>>>>>> 55ce58b2efc67b7e502a0b63d0efd42f41c4c49c
+8. Feature pasien
+9. Feature rekamedis (autocomplete data)
 
-## new feature : 
-1. Export to excel and pdf, more info in git branch report
 
 ## Problem social-login : 
 MongoError: E11000 duplicate key error collection: yelpcamp_v15.users index: local.email_1 dup key: { : null }
@@ -37,6 +34,7 @@ git branch :
 5. klw mau merge, posisinya harus dalam keadaan master, lalu git merge feature1
 6. update git per file : (git add .) kemudian git commit -m "your comment"
 
+## miscellaneous
 Sampai section 33
 berhubungan dengan login yelpcamp
 
@@ -54,12 +52,8 @@ pemanggilan router nya berbeda  :
 campground dan index(login) memakai cara webdevbootcamp
 comment pakai cara scotch.io
 
-
 sampai section 35
 
-
 If you are using angular.js with express.js and node.js, you will need to do some changes in your code to make express CSRF protection mechanism work with angular.js. Angular.js has built-in support for CSRF protection as they have mentioned in their documentation.
-
-
 
 Kalau masih kelihatan teknologi server side nya oleh wappalyzer, penyebabnya adalah cache. Maka, diwajibkan untuk mengganti nilai portnya.

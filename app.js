@@ -51,11 +51,11 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
-limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100 // limit each IP to 100 requests per windowMs
-  });
-app.use(limiter);
+// limiter = rateLimit({
+//     windowMs: 15 * 60 * 1000, // 15 minutes
+//     max: 100 // limit each IP to 100 requests per windowMs
+//   });
+// app.use(limiter);
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname, + "/config"));
 

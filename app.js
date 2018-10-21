@@ -21,7 +21,7 @@ var express             = require('express'),
     campgroundRoutes    = require("./routes/routes_campground"),
     indexRoutes         = require("./routes/routes");
 
-require('dotenv').load();
+require('dotenv').config();
 app = express();
 mongoose.connect(configDB.url, { useNewUrlParser: true }); // connect to our database
 require('./config/passport')(passport); // pass passport for configuration

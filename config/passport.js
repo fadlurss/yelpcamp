@@ -162,7 +162,7 @@ module.exports = function(passport) {
                             if (err)
                                 return done(err);
 
-                            return done(null, newUser, req.flash('success', 'Successfully signed up! Nice to meet you '+firstName+' '+lastName));
+                            return done(null, newUser, req.flash('success', 'Selamat anda berhasil registrasi, silakan cek alamat email anda sekarang!'));
                         });
 
                         var transporter = nodemailer.createTransport({

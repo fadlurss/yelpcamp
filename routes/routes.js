@@ -73,7 +73,7 @@ var crypto      = require('crypto');
 
         // process the signup form
         router.post('/signup', passport.authenticate('local-signup', {
-            successRedirect : '/login', // redirect to the secure profile section
+            successRedirect : '/verify', // redirect to the secure profile section
             failureRedirect : '/signup', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }));
@@ -334,7 +334,7 @@ var crypto      = require('crypto');
 
 
         router.get("/verify", function(req,res){
-            res.render("v_access/verify", {message : req.flash('loginMessage')});
+            res.render("v_access/verify", {message : req.flash('success')});
         });
 
         router.post('/verify', function(req,res){

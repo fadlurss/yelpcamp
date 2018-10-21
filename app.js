@@ -26,7 +26,7 @@ var express             = require('express'),
     pasienRoutes        = require("./routes/routes_pasien");
     rekamedisRoutes     = require("./routes/routes_rekamedis");
 
-require('dotenv').load();
+require('dotenv').config();
 app = express();
 mongoose.connect(configDB.url, { useNewUrlParser: true }); // connect to our database
 require('./config/passport')(passport); // pass passport for configuration

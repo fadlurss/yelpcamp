@@ -333,6 +333,32 @@ var crypto      = require('crypto');
         });
 
 
+        router.get("/verify", function(req,res){
+            res.render("v_access/verify", {message : req.flash('loginMessage')});
+        });
+
+        router.post('/verify', function(req,res){
+            User.findOne({'local.tokenReg' : req.body.tokenReg}, function(err, result){
+                if(err){
+                    console.log(err);
+                    res.redirect("back");
+                } else {
+                    if(!result){
+                        console.log(result);
+                        res.send("user not found");
+                    } else {
+                        // eval(require('locus'));
+                        result.local.activeReg = true;
+                        result.tokenReg = '';
+                        result.save();
+                        req.flash("success", "You successfull verify email!");
+                        res.redirect("/campground");
+                        console.log(result.active);
+                    }
+                }
+            });
+        });
+
     // route middleware to ensure user is logged in
     function isLoggedIn(req, res, next) {
         if (req.isAuthenticated())

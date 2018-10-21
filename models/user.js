@@ -15,13 +15,15 @@ var userSchema = mongoose.Schema({
         password     : String,
         isAdmin      : {type: Boolean, default: false},
         resetPasswordToken : String,
-        resetPasswordExpires : Date
+        resetPasswordExpires : Date,
+        tokenReg   : String,
+        activeReg  : Boolean
     },
     facebook         : {
         id           : String,
         token        : String,
         name         : String,
-        email        : String
+        email        : {type : String, unique : true}
     },
     twitter          : {
         id           : String,

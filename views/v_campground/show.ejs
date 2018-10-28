@@ -22,6 +22,7 @@
               </p>
               <p>Start date : <%= moment(campground.start_date).format('MMMM Do YYYY, h:mm:ss a') %></p>
               <p>End date : <%= moment(campground.end_date).format('MMMM Do YYYY, h:mm:ss a') %></p>
+              <div id="share"></div>
               <p><%= moment().format() %></p>
               <p><% if( moment().isAfter(campground.end_date) ) { %></p>
                 <p><button class="btn btn-danger" disabled>CLOSED</button></p>

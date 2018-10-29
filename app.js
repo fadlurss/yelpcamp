@@ -1,3 +1,4 @@
+require('dotenv').config();
 var express             = require('express'),
     helmet              = require('helmet'),
     mongoose            = require('mongoose'),
@@ -26,7 +27,6 @@ var express             = require('express'),
     pasienRoutes        = require("./routes/routes_pasien");
     rekamedisRoutes     = require("./routes/routes_rekamedis");
 
-require('dotenv').config();
 app = express();
 mongoose.connect(configDB.url, { useNewUrlParser: true }); // connect to our database
 require('./config/passport')(passport); // pass passport for configuration
@@ -80,10 +80,13 @@ app.use("/pasien", pasienRoutes);
 app.use("/rekamedis", rekamedisRoutes);
 
 
+
 app.get("*", function(req,res){
     res.send("404");
 });
 
 app.listen(5000, function(req,res){
     console.log("Server yelpcamp telah dimulai!");
+    // console.log(process.env.CLOUDINARY_API_KEY);
+    // console.log(process.env.CLOUDINARY_API_SECRET);
 });

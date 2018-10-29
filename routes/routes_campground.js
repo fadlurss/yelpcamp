@@ -1,9 +1,33 @@
-var  express = require('express')
-     router = express.Router()
-     m_campground = require("../models/campground")
-     Categories = require("../models/categories")
-     middleware = require("../middleware")
+const express = require('express')
+    router = express.Router()
+    m_campground = require("../models/campground")
+    Categories = require("../models/categories")
+    middleware = require("../middleware")
+    request    = require("request")
+    multer     = require("multer");
 
+const storage = multer.diskStorage({
+    filename: function(req, file, callback){
+        callback(null, Date.now() + file.originalname);
+    }
+});
+
+const imageFilter = function (req, file, cb) {
+    //accept image files only
+    if(!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+        return cb(new Error('Only image files are allowed!'), false);
+    }
+    cb(null, true);
+};
+
+const upload = multer({storage: storage, fileFilter: imageFilter})
+
+const cloudinary = require('cloudinary');
+cloudinary.config({
+    cloud_name: 'ikutanevent',
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
      router.get("/", function(req, res){
         var perPage = 8;
@@ -89,28 +113,32 @@ var  express = require('express')
     });
 
     //CREATE ROUTES
-    router.post("/",middleware.isLoggedIn ,function(req,res){
-        var name = req.body.name;
-        var encodedName = req.body.name.split(' ').join('-');
-        var image = req.body.image;
-        var description = req.body.description;
-        var categories = req.body.categories;
-        var price = req.body.price;
-        var start_date = req.body.start_date;
-        var end_date = req.body.end_date;
-        var author = {
-            id : req.user._id,
-            username : req.body.username
-        }
-        var newCampground = {name : name, encodedName : encodedName, image : image, categories: categories, description : description, author : author, price : price, start_date: start_date, end_date: end_date};
-        m_campground.create(newCampground, function(err, input_blog_baru){
-            if(err){//jika gagal balik ke form new
-                res.render("v_campground/new");
-            } else {//jika berhasil balik ke halaman campground
-                // console.log(input_blog_baru);
-                
-                res.redirect("/campground");
+    router.post("/",middleware.isLoggedIn, upload.single('image'), function(req,res){
+        cloudinary.uploader.upload(req.file.path, function(result) {
+            var name = req.body.name;
+            var encodedName = req.body.name.split(' ').join('-');
+            var image = req.body.image;
+            image = result.secure_url;
+            var description = req.body.description;
+            var categories = req.body.categories;
+            var price = req.body.price;
+            var start_date = req.body.start_date;
+            var end_date = req.body.end_date;
+            var author = {
+                id : req.user._id,
+                username : req.body.username
             }
+            var newCampground = {name : name, encodedName : encodedName, image : image, categories: categories, description : description, author : author, price : price, start_date: start_date, end_date: end_date};
+            m_campground.create(newCampground, function(err, input_blog_baru){
+                if(err){//jika gagal balik ke form new
+                    res.render("v_campground/new");
+                } else {//jika berhasil balik ke halaman campground
+                    // console.log(input_blog_baru);
+                    
+                    res.redirect("/campground");
+                    // res.redirect("/campground/" + campground.id);
+                }
+            });
         });
     });
 

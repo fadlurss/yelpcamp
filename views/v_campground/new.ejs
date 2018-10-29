@@ -2,10 +2,9 @@
 <div class="container">
     <h1 style="text-align: center; margin: 25px auto;">Create a New Campground</h1>
     <div style="width: 30%; margin: 25px auto;">
-            <form action="/campground" method="POST">
+            <form action="/campground" method="POST" enctype="multipart/form-data">
                 <label for="">Name of Campground</label>
                 <div class="form-group">
-                        
                         <input type="text" class="form-control" name="name" placeholder="Name">
                 </div>
                 <label for="">User of Create Campground</label>
@@ -26,8 +25,8 @@
                 </div>
                 <label for="">Image Campground</label>
                 <div class="form-group">
-                        <input type="text" class="form-control" name="image" placeholder="Url of Image">
-                        <!-- <input type="file" id="image" class="form-control" name="image" accept="image/*" required> -->
+                        <!-- <input type="text" class="form-control" name="image" placeholder="Url of Image"> -->
+                        <input type="file" id="image" class="form-control" name="image" accept="image/*" required>
                 </div>
                 <label for="">Start</label>
                 <div class="form-group">

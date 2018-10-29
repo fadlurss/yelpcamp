@@ -3,6 +3,11 @@
 2. Feature jQuery branch included
 3. Feature Pagination branch included
 4. Feature Sorting branch included
+5. Feature Category branch included
+6. Feature Start date campground to end date campground
+7. Feature Report excel, pdf
+8. Feature pasien
+9. Feature rekamedis (autocomplete data)
 
 
 ## Problem social-login : 
@@ -29,6 +34,7 @@ git branch :
 5. klw mau merge, posisinya harus dalam keadaan master, lalu git merge feature1
 6. update git per file : (git add .) kemudian git commit -m "your comment"
 
+## miscellaneous
 Sampai section 33
 berhubungan dengan login yelpcamp
 
@@ -46,12 +52,8 @@ pemanggilan router nya berbeda  :
 campground dan index(login) memakai cara webdevbootcamp
 comment pakai cara scotch.io
 
-
 sampai section 35
 
-
 If you are using angular.js with express.js and node.js, you will need to do some changes in your code to make express CSRF protection mechanism work with angular.js. Angular.js has built-in support for CSRF protection as they have mentioned in their documentation.
-
-
 
 Kalau masih kelihatan teknologi server side nya oleh wappalyzer, penyebabnya adalah cache. Maka, diwajibkan untuk mengganti nilai portnya.

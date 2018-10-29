@@ -23,8 +23,10 @@ var express             = require('express'),
     indexRoutes         = require("./routes/routes");
     adminRoutes         = require("./routes/routes_admin");
     categoriesRoutes    = require("./routes/routes_categories");
+    pasienRoutes        = require("./routes/routes_pasien");
+    rekamedisRoutes     = require("./routes/routes_rekamedis");
 
-require('dotenv').load();
+require('dotenv').config();
 app = express();
 mongoose.connect(configDB.url, { useNewUrlParser: true }); // connect to our database
 require('./config/passport')(passport); // pass passport for configuration
@@ -49,11 +51,11 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
-limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100 // limit each IP to 100 requests per windowMs
-  });
-app.use(limiter);
+// limiter = rateLimit({
+//     windowMs: 15 * 60 * 1000, // 15 minutes
+//     max: 100 // limit each IP to 100 requests per windowMs
+//   });
+// app.use(limiter);
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname, + "/config"));
 
@@ -74,6 +76,8 @@ app.use("/campground", campgroundRoutes);
 app.use("/admin", adminRoutes);
 app.use("/campground/:id/comment", commentRoutes);
 app.use("/categories",categoriesRoutes);
+app.use("/pasien", pasienRoutes);
+app.use("/rekamedis", rekamedisRoutes);
 
 
 app.get("*", function(req,res){

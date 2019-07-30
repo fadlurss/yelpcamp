@@ -1,0 +1,48 @@
+<% include ../partials/admin/header %>
+<div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">New Categories</h1>
+                
+            <br><br>
+          
+                    
+                
+            </div>
+           
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Categories Tables
+                        
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="col-sm-6">
+                           
+                            <form action="/categories/new" method="POST">
+                                <div class="form-group">
+                                    <label for="">Name categories</label>
+                                    <input type="text" name="categories" placeholder="Name" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-success">Submit</button>
+                                </div>
+
+                            </form>
+                            
+                        </div>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>     
+</div>
+    <!-- /#page-wrapper -->
+<% include ../partials/admin/footer %>

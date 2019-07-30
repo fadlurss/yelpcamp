@@ -1,0 +1,50 @@
+<% include ../partials/header %>
+<div class="container">
+    <h1 style="text-align: center; margin: 25px auto;">Edit <%= halaman_edit_id.title %></h1>
+    <div style="width: 50%; margin: 25px auto;">
+            <form action="/campground/<%= halaman_edit_id._id %>?_method=PUT" enctype="multipart/form-data" method="POST">
+                <label for="">Name of Campground</label>
+                <div class="form-group">
+                        <input type="text" name="name" class="form-control" value="<%= halaman_edit_id.name %>">
+                        <input type="text" hidden name="username" value="<%= halaman_edit_id.author.username %>">
+                </div>
+                <div class="form-group">
+                        <label for="">Category</label>
+                        <select name="categories" id="" class="form-control" id="">
+                                <% categories.forEach(function(hasil){ %>
+                                <option value="<%= hasil.id %>"><%= hasil.name %></option>
+                                <% }); %>
+                        </select>
+                </div>
+                <label for="">Price Campground</label>
+                <div class="form-group">
+                        <input type="number" class="form-control" name="price" placeholder="Price" value="<%= halaman_edit_id.price %>" min="50.000" step="50.000">
+                </div>
+                <label for="">Image Campground</label>
+                <div class="form-group">
+                        <!-- <input type="text" class="form-control" name="image" placeholder="Url of Image"> -->
+                        <input type="file" id="image" class="form-control" name="image" value="<%= halaman_edit_id.image %>" accept="image/*" required>
+                </div>
+                <label for="">Start</label>
+                <div class="form-group">
+                        <div id="picker"></div>
+                        <input type="hidden" name="start_date" id="result" value="" />
+                </div>
+                <label for="">End</label>
+                <div class="form-group">
+                        <div id="picker2"></div>
+                        <input type="hidden" name="end_date" id="result" value="" />
+                </div>
+                <label for="">Content of Campground</label>
+                <div class="form-group">
+                        <textarea name="description" class="form-control" id="" cols="50" rows="10"><%= halaman_edit_id.description %></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-info btn-block">Submit</button>
+                </div>  
+            </form>
+            <a href="/campground">Go back</a>
+    </div>
+</div>
+    
+<% include ../partials/footer %>

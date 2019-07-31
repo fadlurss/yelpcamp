@@ -16,7 +16,7 @@ const express = require('express'),
     MongoStore = require('connect-mongo')(session),
     commentRoutes = require("./routes/routes_comment"),
     campgroundRoutes = require("./routes/routes_campground"),
-    indexRoutes = require("./routes/routes");
+    indexRoutes = require("./routes/routes_user");
 adminRoutes = require("./routes/routes_admin");
 categoriesRoutes = require("./routes/routes_categories");
 

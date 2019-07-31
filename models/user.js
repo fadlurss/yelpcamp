@@ -1,55 +1,85 @@
 // load the things we need
 var mongoose = require('mongoose');
 var passportLocalMongoose = require('passport-local-mongoose');
-var bcrypt   = require('bcrypt-nodejs');
+var bcrypt = require('bcrypt-nodejs');
 
 // define the schema for our user model
 var userSchema = mongoose.Schema({
 
-    local            : {
-        id           : String,
-        email        : {type : String, unique : true},
-        firstName    : String,
-        lastName     : String,
-        username     : {type : String, unique : true},
-        password     : String,
-        isAdmin      : {type: Boolean, default: false},
-        resetPasswordToken : {type: String, default: null},
-        resetPasswordExpires : {type: Date, default: Date.Now},
-        tokenReg   : String,
-        activeReg  : Boolean,
-        statusAkun     : {type: Boolean, default: false},
-        image_ktp  : String,
+    local: {
+        id: String,
+        email: {
+            type: String,
+            unique: true
+        },
+        firstName: String,
+        lastName: String,
+        name: {
+            type: String,
+            unique: true
+        },
+        password: String,
+        isAdmin: {
+            type: Boolean,
+            default: false
+        },
+        resetPasswordToken: {
+            type: String,
+            default: null
+        },
+        resetPasswordExpires: {
+            type: Date,
+            default: Date.Now
+        },
+        tokenReg: String,
+        activeReg: Boolean,
+        statusAkun: {
+            type: Boolean,
+            default: false
+        },
+        image_ktp: String,
         image_ktp_selfie: String
     },
-    facebook         : {
-        id           : String,
-        token        : String,
-        name         : String,
-        email        : {type : String, unique : true}
+    facebook: {
+        id: String,
+        token: String,
+        name: String,
+        email: {
+            type: String,
+            unique: true
+        }
     },
-    twitter          : {
-        id           : String,
-        token        : String,
-        displayName  : String,
-        username     : String
+    twitter: {
+        id: String,
+        token: String,
+        displayName: String,
+        username: String
     },
-    google           : {
-        id           : String,
-        token        : String,
-        email        : {type : String, unique : true},
-        name         : String
+    google: {
+        id: String,
+        token: String,
+        email: {
+            type: String,
+            unique: true
+        },
+        name: String,
+        statusAkun: {
+            type: Boolean,
+            default: false
+        },
+        image_ktp: String,
+        image_ktp_selfie: String
     }
 
 });
 
 // generating a hash
-userSchema.methods.generateHash = function(password) {
+userSchema.methods.generateHash = function (password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
 };
 
 // checking if password is valid
-userSchema.methods.validPassword = function(password) {
+userSchema.methods.validPassword = function (password) {
     // console.log(bcrypt.compareSync(password, this.local.password));
     return bcrypt.compareSync(password, this.local.password)
 };

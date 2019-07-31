@@ -1,24 +1,31 @@
 <% include ../partials/header %>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <h1><%= campgrounds[0].author.username %></h1>
-                <div class="thumbnail">
-                    <img src="<%= user.avatar %>" alt="user profile image">
-                    <div class="caption">
-                        Send me email : <a href="mailto:<%= user.local.email %><%= user.google.email %>"><%= user.local.email %><%= user.google.email %></a>
-                    </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h1><%= user.local.name %> <%= user.google.name %></h1>
+            <div class="thumbnail">
+                <img src="<%= user.avatar %>" alt="user profile image">
+                <div class="caption">
+                    Send me email : <a
+                        href="mailto:<%= user.local.email %><%= user.google.email %>"><%= user.local.email %><%= user.google.email %></a>
                 </div>
             </div>
-            <div class="col-md-8">
-                <h3><%= campgrounds[0].author.username %>'s campground : </h3>
-                    <% campgrounds.forEach(function(list_campground){ %>
-                        <ul>
-                            <li><a href="/campground/<%= list_campground.encodedName %>"><%= list_campground.name %></a></li>
-                        </ul>
-                    <% }); %>
-            </div>
         </div>
+        <% if (campgrounds && campgrounds.length <= 0) { %>
+        <div class="col-md-8">
+            <h3>Maaf anda belum memiliki acara satupun, silakan buat <a href="/campground/new">acara</a>.</h3>
+        </div>
+        <% } else if(campgrounds && campgrounds.length >= 0) { %>
+        <div class="col-md-8">
+            <h3><%= user.local.name %><%= user.google.name %>'s campground : </h3>
+            <% campgrounds.forEach(function(list_campground){ %>
+            <ul>
+                <li><a href="/campground/<%= list_campground.encodedName %>"><%= list_campground.name %></a></li>
+            </ul>
+            <% }); %>
+        </div>
+        <% } %>
     </div>
-    
+</div>
+
 <% include ../partials/footer %>

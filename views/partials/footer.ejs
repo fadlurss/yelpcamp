@@ -1,7 +1,8 @@
 </div><!-- /.container -->
 <footer class="footer">
   <div class="container">
-    <p class="text-muted">&copy; YelpCamp <%= moment().format('YYYY') %> | <a href="/campground">Home</a> | <a href="/campground/new">New Campground</a></p>
+    <p class="text-muted">&copy; YelpCamp <%= moment().format('YYYY') %> | <a href="/campground">Home</a> | <a
+        href="/campground/new">New Campground</a></p>
   </div>
 </footer>
 <!-- jQuery CDN -->
@@ -19,7 +20,17 @@
 <!-- <script src="https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js"></script> -->
 <!-- <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5bdb908c8509a10011c44714&product=inline-share-buttons' async='async'></script> -->
 
-
+<script>
+  document.getElementById("tindakan_oleh_by").addEventListener('change', function () {
+    var style = this.value == "Gratis" ? '' : 'none';
+    document.getElementById('hidden_div').style.display = style;
+  })
+  document.getElementById("tindakan_oleh_by").addEventListener('change', function () {
+    var style = this.value == "Bayar" ? '' : 'none';
+    document.getElementById('hidden_div2').style.display = style;
+  })
+</script>
 </body>
+
 </html>
 <!--  -->

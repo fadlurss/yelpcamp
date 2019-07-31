@@ -46,6 +46,8 @@ git branch :
 4. git checkout master
 5. klw mau merge, posisinya harus dalam keadaan master, lalu git merge feature1
 6. update git per file : (git add .) kemudian git commit -m "your comment"
+7. git remote add origin https://github.com/fadlurss/yelpcamp
+8. git push -f --set-upstream origin master
 
 ## miscellaneous
 Sampai section 33

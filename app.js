@@ -10,6 +10,7 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     configDB = require('./config/database.js'),
     session = require('express-session'),
+    Categories = require('./models/categories'),
     methodOverride = require('method-override'),
     cors = require('cors'),
     validator = require('express-validator'),
@@ -55,12 +56,14 @@ app.use(passport.session()); // persistent login sessions
 app.use(express.static(__dirname + "/public")); // jangan pakai koma seperti config
 app.use(express.static(__dirname, +"/config"));
 
-app.use(function (req, res, next) { //buat melihat siapa yang login, ada di header welcome back!! semacam session bisa mengeluarkan email 
+app.use(async function (req, res, next) { //buat melihat siapa yang login, ada di header welcome back!! semacam session bisa mengeluarkan email 
     res.locals.currentUser = req.user;
     res.locals.session = req.session;
     res.locals.error = req.flash("error"); //utk mengirim pesan ke semua router
     res.locals.success = req.flash("success");
     res.locals.pesan_cari = req.flash("pesan_cari");
+    const data_cat = await Categories.find({});
+    res.locals.cate = data_cat;
     // res.setHeader("Content-Type", "application/json");
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");

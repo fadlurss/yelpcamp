@@ -1,76 +1,127 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>YelpCamp</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="/stylesheets/datetimepicker.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="/stylesheets/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
-    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-flat.css" />
-   
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>YelpCamp</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+                integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+                crossorigin="anonymous">
+        <link href="/stylesheets/datetimepicker.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        <link rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
+        <link type="text/css" rel="stylesheet"
+                href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-flat.css" />
 
-    
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.0/moment-with-locales.min.js"></script>
-    
-    <script type="text/javascript" src="/js/datetimepicker.js"></script>
-    <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5bdb908c8509a10011c44714&product=inline-share-buttons' async='async'></script>
-    
 
-    <!-- <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css"> -->
-    
-    <script type="text/javascript">
-    $(document).ready( function () {
-        $('#picker').dateTimePicker();
-        $('#picker2').dateTimePicker();
-    })
-    </script>
+
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+                integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
+                crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+                crossorigin="anonymous"></script>
+        <script type="text/javascript"
+                src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.0/moment-with-locales.min.js"></script>
+
+        <script type="text/javascript" src="/js/datetimepicker.js"></script>
+        <script type='text/javascript'
+                src='//platform-api.sharethis.com/js/sharethis.js#property=5bdb908c8509a10011c44714&product=inline-share-buttons'
+                async='async'></script>
+
+
+        <!-- <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css"> -->
+
+        <script type="text/javascript">
+                $(document).ready(function () {
+                        $('#picker').dateTimePicker();
+                        $('#picker2').dateTimePicker();
+                })
+        </script>
+
+        <script
+                src="https://cdn.tiny.cloud/1/bkxa3asukr1q8macg4z77j76w1o97ucd584fuxcpko1bpfcw/tinymce/5/tinymce.min.js">
+        </script>
+
+        <script>
+                tinymce.init({
+                        selector: "#mytextarea", // change this value according to your HTML
+                        plugins: [
+                                'advlist autolink lists link image charmap print preview anchor textcolor',
+                                'searchreplace visualblocks code fullscreen',
+                                'insertdatetime media table contextmenu paste code help wordcount'
+                        ],
+                        toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+                        content_css: [
+                                '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                                '//www.tinymce.com/css/codepen.min.css'
+                        ]
+                });
+        </script>
 </head>
+
 <body>
         <nav class="navbar navbar-default">
                 <div class="container-fluid" id="navfluid">
-                    <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigationbar">
-                                    <span class="sr-only">Toggle navigation</span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                            </button>
-                            <a href="/campground" class="navbar-brand">
-                                 YelpCamp
-                            </a>
-                            
-                    </div>  
-                    <div class="collapse navbar-collapse" id="navigationbar">
-                            <ul class="nav navbar-nav navbar-right">
-                                                
+                        <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                        data-target="#navigationbar">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                </button>
+                                <a href="/campground" class="navbar-brand">
+                                        YelpCamp
+                                </a>
+
+                        </div>
+                        <div class="collapse navbar-collapse" id="navigationbar">
+                                <ul class="nav navbar-nav navbar-right">
+
                                         <% if(!currentUser){%>
-                                                <li><a class="nav-link" href="/index">Log In or Register </a></li>
+                                        <li><a class="nav-link" href="/index">Log In or Register </a></li>
                                         <% } else { %>
-                                                <li><a href="/admin">My Admin</a></li>
-                                                <li><a href="/users/<%= currentUser.id %>">Logged in as <%= currentUser.local.firstName %> <%= currentUser.local.lastName %> <%= currentUser.google.name %> <%= currentUser.facebook.name %></a> </li>
-                                                <li> <a class="nav-link" href="/logout">Logout</a></li>
+                                        <li><a href="/admin">My Admin</a></li>
+                                        <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                                        role="button" data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                        Categories
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                                        <% cate.forEach(function(hasil){ %>
+                                                        <ul class="dropdown-item">
+                                                                <a
+                                                                        href="/categories/<%= hasil.id %>"><%= hasil.name %></a>
+                                                        </ul>
+                                                        <% }) %>
+                                                </div>
+                                        </li>
+
+                                        <li><a href="/users/<%= currentUser.id %>">Logged in as
+                                                        <%= currentUser.local.firstName %>
+                                                        <%= currentUser.local.lastName %> <%= currentUser.google.name %>
+                                                        <%= currentUser.facebook.name %></a> </li>
+                                        <li> <a class="nav-link" href="/logout">Logout</a></li>
                                         <% }  %>
-                                                
-                                        </div>
-                                       
-                            </ul>
-                    </div>
+
+                        </div>
+
+                        </ul>
+                </div>
                 </div>
         </nav>
 
         <div class="container">
-               <% if (success && success.length > 0) { %>
-                 <div class="alert alert-success" role="alert"><%= success %></div>
-               <% } %>
-               <% if (error && error.length > 0) { %>
+                <% if (success && success.length > 0) { %>
+                <div class="alert alert-success" role="alert"><%= success %></div>
+                <% } %>
+                <% if (error && error.length > 0) { %>
                 <div class="alert alert-danger" role="alert"><%= error %></div>
-              <% } %>
+                <% } %>
         </div>

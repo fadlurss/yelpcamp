@@ -2,10 +2,19 @@ var express = require('express')
 router = express.Router()
 Categories = require("../models/categories")
 Campground = require("../models/campground")
+middleware = require("../middleware")
+asyncMiddleware = require("../middleware");
 
-exports.new_categories = function (req, res) {
+exports.get_categories = middleware.asyncMiddleware(async (req, res, next) => {
+    const data_cat = await Categories.find({});
+    res.render('partials/header', {
+        data_cat: data_cat
+    });
+});
+
+exports.new_categories = middleware.asyncMiddleware(async (req, res, next) => {
     res.render("v_categories/new");
-};
+});
 
 exports.create_categories = function (req, res) {
     var name = req.body.categories;

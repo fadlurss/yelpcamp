@@ -1,6 +1,6 @@
-var mongoose    = require("mongoose");
+var mongoose = require("mongoose");
 
-var commentSchema   = mongoose.Schema({
+var commentSchema = mongoose.Schema({
     content: String,
     approveComment: {
         type: Boolean,
@@ -14,13 +14,16 @@ var commentSchema   = mongoose.Schema({
         username: String
     },
 
-    created : {type : Date, default: Date.now}
+    created: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 
-module.exports  = mongoose.model("Comment", commentSchema);
+module.exports = mongoose.model("Comment", commentSchema);
 
- // author : {
-    //         id : mongoose.Schema.Types.ObjectId,
-    //         username : String
-    // },
+// author : {
+//         id : mongoose.Schema.Types.ObjectId,
+//         username : String
+// },

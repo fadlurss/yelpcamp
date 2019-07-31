@@ -15,10 +15,15 @@ cloudinary.config({
 exports.read_campground = middleware.asyncMiddleware(async (req, res, next) => {
     const perPage = 8;
     const pageQuery = parseInt(req.query.page);
+    const data_categories = await Categories.find({});
     const pageNumber = pageQuery ? pageQuery : 1;
+
     var noMatch = null;
     if (req.query.search) {
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+
+        console.log(data_categories);
+
         const allCampgrounds = await m_campground.find({
             name: regex
         }).skip((perPage * pageNumber) - perPage).limit(perPage)
@@ -30,6 +35,7 @@ exports.read_campground = middleware.asyncMiddleware(async (req, res, next) => {
         }
         res.render("v_campground/index", {
             campgrounds: allCampgrounds,
+
             current: pageNumber,
             pages: Math.ceil(count / perPage),
             noMatch: noMatch,
@@ -43,6 +49,7 @@ exports.read_campground = middleware.asyncMiddleware(async (req, res, next) => {
         Categories.find({}, function (err, categories) {
             res.render("v_campground/index", {
                 categories: categories,
+                data_categories: data_categories,
                 campgrounds: allCampgrounds,
                 current: pageNumber,
                 pages: Math.ceil(count / perPage),

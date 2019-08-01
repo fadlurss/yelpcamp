@@ -7,6 +7,10 @@ var nodemailer = require('nodemailer');
 var crypto = require('crypto');
 var Categories = require('../models/categories');
 const bcrypt = require('bcrypt-nodejs');
+asyncMiddleware = require("../middleware");
+Joi = require('joi');
+
+
 
 const cloudinary = require('cloudinary');
 cloudinary.config({
@@ -22,6 +26,17 @@ exports.redirect_index = function (req, res) {
 exports.render_index = function (req, res) {
     res.render('v_access/index');
 };
+
+exports.update_user = middleware.asyncMiddleware(async (req, res, next) => {
+    const email_local = req.body.email_local;
+    const email_google = req.body.email_google;
+    const updateuser = {
+        "local.email": email_local,
+        "google.email": email_google
+    }
+    const hasil_update = await User.findOneAndUpdate(req.params.id, updateuser);
+    res.redirect('/users/' + hasil_update._id);
+});
 
 // PROFILE SECTION 
 exports.profile_user = function (req, res) {

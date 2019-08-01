@@ -1,14 +1,5 @@
 <% include ../partials/header %>
 <div class="row">
-  <div class="col-md-3">
-    <p class="lead">Categories YelpCamp</p>
-    <div class="list-group">
-      <% categories.forEach(function(hasil){ %>
-      <li class="list-group-item"><a href="/categories/<%= hasil.id %>"><%= hasil.name %></a></li>
-      <% }) %>
-    </div>
-    <div id="map"></div>
-  </div>
   <div class="col-md-9">
     <div class="thumbnail">
       <img class="img-responsive" src="<%= campground.image.link %>">
@@ -34,11 +25,14 @@
         <div class="sharethis-inline-share-buttons"></div>
         <div class="sharethis-inline-reaction-buttons"></div>
         <% if(currentUser && campground.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
-        <a class="btn btn-xs btn-warning" href="/campground/<%= campground._id %>/edit"><i class="fa fa-pencil-square-o"
-            aria-hidden="true"></i></a>
-        <form action="/campground/<%= campground._id %>?_method=DELETE" method="POST" class="delete-form">
-          <button class="btn btn-xs btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
-        </form>
+        <div class="form-group">
+          <a class="btn btn-xs btn-warning" href="/campground/<%= campground._id %>/edit">Edit</a>
+          <a class="btn btn-white btn-xs" href="">
+            <form action="/campground/<%= campground._id %>?_method=DELETE" method="POST" class="delete-form">
+              <button class="btn btn-xs btn-danger">Hapus</button>
+            </form>
+          </a>
+        </div>
         <% } %>
       </div>
     </div>

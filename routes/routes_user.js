@@ -26,6 +26,7 @@ const upload = multer({
 router.get('/', con_user.redirect_index);
 router.get('/index', con_user.render_index);
 router.get('/users/:id', asyncMiddleware.isLoggedIn, con_user.profile_user);
+router.put("/users/:id", con_user.update_user);
 router.get('/logout', con_user.logout);
 router.get('/login', con_user.get_login);
 router.post('/login', con_user.post_login);

@@ -1,46 +1,50 @@
 var mongoose = require('mongoose');
 var campgroundSchema = new mongoose.Schema({
-    name : {
-            type: String,
-            unique: true,
+    name: {
+        type: String,
+        unique: true,
+        index: true
     },
-    encodedName : {
-            type: String,
-            unique: true,
+    encodedName: {
+        type: String,
+        unique: true,
     },
-    image : {
+    image: {
         link: String,
         public_id: String
     },
-    price : String,
-    author : {
-        id : {
+    price: String,
+    author: {
+        id: {
             type: mongoose.Schema.Types.ObjectId,
-            ref : "User"
+            ref: "User"
         },
-        username : String,
-        firstName : String,
-        lastName : String,
-        email : String,
+        username: String,
+        firstName: String,
+        lastName: String,
+        email: String,
     },
-    created : {type : Date, default: Date.now},
-    start_date : Date,
-    end_date : Date,
-    description : String,
-    categories : {
+    created: {
+        type: Date,
+        default: Date.now
+    },
+    start_date: Date,
+    end_date: Date,
+    description: String,
+    categories: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Categories'
     },
-    comments : [
-        {
-            type : mongoose.Schema.Types.ObjectId,
-            ref : "Comment"
-        }
-    ]
+    comments: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Comment"
+    }]
 });
 
-campgroundSchema.static("findByEncodedName", function(encodedName, callback){
-    return this.find({encodedName: encodedName}, callback);
+campgroundSchema.static("findByEncodedName", function (encodedName, callback) {
+    return this.find({
+        encodedName: encodedName
+    }, callback);
 });
 
 module.exports = mongoose.model("Campground", campgroundSchema);

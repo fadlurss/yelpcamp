@@ -10,7 +10,9 @@ var userSchema = mongoose.Schema({
         id: String,
         email: {
             type: String,
-            unique: true
+            unique: true,
+            index: true,
+            sparse: true
         },
         firstName: String,
         lastName: String,

@@ -78,7 +78,7 @@ exports.post_campground = middleware.asyncMiddleware(async (req, res, next) => {
             link: result.secure_url,
             public_id: result.public_id
         };
-        const description = req.body.description;
+        const description = req.body.mytextarea;
         const categories = req.body.categories;
         const price = req.body.price;
         const start_date = req.body.start_date;

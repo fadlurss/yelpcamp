@@ -71,6 +71,10 @@ exports.new_campground = middleware.asyncMiddleware(async (req, res, next) => {
 //CREATE ROUTES
 exports.post_campground = middleware.asyncMiddleware(async (req, res, next) => {
     cloudinary.uploader.upload(req.file.path, async (result) => {
+        const a = 0;
+        const b = 0;
+        const price = "";
+        const count_ticket = "";
         const name = req.body.name;
         const encodedName = req.body.name.split(' ').join('-');
         var image = req.body.image;
@@ -80,7 +84,19 @@ exports.post_campground = middleware.asyncMiddleware(async (req, res, next) => {
         };
         const description = req.body.mytextarea;
         const categories = req.body.categories;
-        const price = req.body.price;
+        if (req.body.free) {
+            price = 0;
+        }
+        if (req.body.price) {
+            price = req.body.price;
+        }
+
+        if (req.body.unlimited) {
+            count_ticket = 0;
+        }
+        if (req.body.count_ticket) {
+            count_ticket = req.body.count_ticket;
+        }
         const start_date = req.body.start_date;
         const end_date = req.body.end_date;
         const author = {
@@ -95,6 +111,7 @@ exports.post_campground = middleware.asyncMiddleware(async (req, res, next) => {
             description: description,
             author: author,
             price: price,
+            count_ticket: count_ticket,
             start_date: start_date,
             end_date: end_date
         };

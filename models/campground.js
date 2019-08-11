@@ -13,7 +13,8 @@ var campgroundSchema = new mongoose.Schema({
         link: String,
         public_id: String
     },
-    price: String,
+    price: Number,
+    count_ticket: Number,
     author: {
         id: {
             type: mongoose.Schema.Types.ObjectId,

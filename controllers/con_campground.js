@@ -74,7 +74,6 @@ exports.post_campground = middleware.asyncMiddleware(async (req, res, next) => {
         const a = 0;
         const b = 0;
         const price = "";
-        const count_ticket = "";
         const name = req.body.name;
         const encodedName = req.body.name.split(' ').join('-');
         var image = req.body.image;

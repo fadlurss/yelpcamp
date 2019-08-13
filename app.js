@@ -17,9 +17,10 @@ const express = require('express'),
     MongoStore = require('connect-mongo')(session),
     commentRoutes = require("./routes/routes_comment"),
     campgroundRoutes = require("./routes/routes_campground"),
-    indexRoutes = require("./routes/routes_user");
-adminRoutes = require("./routes/routes_admin");
-categoriesRoutes = require("./routes/routes_categories");
+    indexRoutes = require("./routes/routes_user"),
+    bookingRoutes = require("./routes/routes_booking"),
+    adminRoutes = require("./routes/routes_admin"),
+    categoriesRoutes = require("./routes/routes_categories");
 
 app = express();
 mongoose.connect(configDB.url, {
@@ -75,6 +76,7 @@ app.use("/campground", campgroundRoutes);
 app.use("/admin", adminRoutes);
 app.use("/campground/:id/comment", commentRoutes);
 app.use("/categories", categoriesRoutes);
+app.use("/booking", bookingRoutes);
 
 
 app.get("*", function (req, res) {

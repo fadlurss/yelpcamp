@@ -10,7 +10,16 @@
           <% } else { %>
           <p> Rp <%= campground.price %> </p>
           <% } %>
+          <% if(campground.count_ticket >= 1) { %>
+          <form action="/booking/" method="POST">
+            <input type="hidden" value="<%= campground.id %>" name="id_campground">
+            <input type="hidden" value="<%= currentUser.id %>" name="id_user">
+            <button class="btn btn-primary btn-sm">Booking Event</button>
+          </form>
+          <% } %>
         </h4>
+
+
         <h4><a><%=campground.name%></a></h4>
         <p>
           <em>Submitted by: <a href="/users/<%= campground.author.id %>"><%= campground.author.username %></a>,

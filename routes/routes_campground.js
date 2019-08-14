@@ -27,11 +27,12 @@ const upload = multer({
 
 
 router.get("/", campground.read_campground);
+router.get("/:encodedName", campground.show_campground);
 router.get("/new", middleware.isLoggedIn, campground.new_campground);
 router.post("/", middleware.isLoggedIn, upload.single('image'), campground.post_campground);
 router.get("/:id/edit", middleware.checkCampgroundOwnership, campground.edit_campground);
 router.put("/:id", middleware.checkCampgroundOwnership, upload.single('image'), campground.update_campground);
-router.get("/:encodedName", campground.edit_name_campground);
+// router.get("/:encodedName", campground.edit_name_campground);
 router.delete("/:id", middleware.checkCampgroundOwnership, campground.delete_campground);
 
 module.exports = router;

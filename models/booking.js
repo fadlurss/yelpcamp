@@ -4,7 +4,10 @@ var bookingSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    status: String,
+    status: {
+        type: String,
+        default: "Belum bayar"
+    },
     id_user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'

@@ -1,5 +1,6 @@
 const m_campground = require("../models/campground")
 Categories = require("../models/categories")
+Booking = require("../models/booking")
 middleware = require("../middleware")
 request = require("request")
 multer = require("multer");
@@ -134,11 +135,18 @@ exports.show_campground = middleware.asyncMiddleware(async (req, res, next) => {
             }
         })
         .populate("categories")
-    const categories = await Categories.find({});
+        .populate({
+            path: "booking"
+        });
+    // console.log(campground_slug[0].booking.id_user);
+    console.log(req.user.id);
+
+
     res.render("v_campground/show", {
         categories: categories,
         campground: campground_slug[0]
     });
+
 });
 
 //EDIT ROUTES

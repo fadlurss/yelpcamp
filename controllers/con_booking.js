@@ -19,6 +19,9 @@ exports.post_booking = middleware.asyncMiddleware(async (req, res, next) => {
     }, {
         $inc: {
             count_ticket: ticket
+        },
+        $push: {
+            booking: postBooking.id
         }
     });
     res.redirect("/campground/");

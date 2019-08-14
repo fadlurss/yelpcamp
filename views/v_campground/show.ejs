@@ -10,13 +10,18 @@
           <% } else { %>
           <p> Rp <%= campground.price %> </p>
           <% } %>
-          <% if(campground.count_ticket >= 1) { %>
+
+          <% campground.booking.forEach(function(hasil){ %>
+          <% if(currentUser && currentUser._id.equals(hasil.id_user)) { %>
+          <p>Menuggu bayar</p>
+          <% } else if (campground.count_ticket >= 1) { %>
           <form action="/booking/" method="POST">
             <input type="hidden" value="<%= campground.id %>" name="id_campground">
             <input type="hidden" value="<%= currentUser.id %>" name="id_user">
             <button class="btn btn-primary btn-sm">Booking Event</button>
           </form>
           <% } %>
+          <% }) %>
         </h4>
 
 

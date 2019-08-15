@@ -36,17 +36,14 @@
         <div class="sharethis-inline-share-buttons"></div>
         <div>
           <% campground.bookings.forEach(function(hasil){ %>
-          <% if(currentUser._id.equals(hasil.id_user)) { %>
+          <% if(currentUser && currentUser._id.equals(hasil.id_user)) { %>
           <p>Menunggu pembayaran</p>
           <%= hasil.id_user %> <%= currentUser._id %>
-          <% } else { %>
-          <%= hasil.id_user %> <%= currentUser._id %>
-          <% if(!currentUser._id.equals(hasil.id_user)) { %>
+          <% } else if(currentUser && currentUser._id != hasil.id_user) { %>
           <form action="/booking/<%= campground._id %>" method="POST">
             <input type="hidden" value="<%= campground.id %>" name="id_campground">
             <button class="btn btn-primary btn-sm">Booking Event</button>
           </form>
-          <% } %>
           <% } %>
           <% }) %>
 

@@ -11,10 +11,6 @@ var bookingSchema = new mongoose.Schema({
     id_user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    },
-    id_campground: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Campground'
     }
 });
 

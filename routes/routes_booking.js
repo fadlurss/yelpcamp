@@ -6,6 +6,6 @@ multer = require("multer");
 asyncMiddleware = require("../middleware");
 
 
-router.post("/", middleware.isLoggedIn, booking.post_booking);
+router.post("/:id", middleware.isLoggedIn, booking.post_booking);
 
 module.exports = router;

@@ -10,20 +10,7 @@
           <% } else { %>
           <p> Rp <%= campground.price %> </p>
           <% } %>
-
-          <% campground.booking.forEach(function(hasil){ %>
-          <% if(currentUser && currentUser._id.equals(hasil.id_user)) { %>
-          <p>Menuggu bayar</p>
-          <% } else if (campground.count_ticket >= 1) { %>
-          <form action="/booking/" method="POST">
-            <input type="hidden" value="<%= campground.id %>" name="id_campground">
-            <input type="hidden" value="<%= currentUser.id %>" name="id_user">
-            <button class="btn btn-primary btn-sm">Booking Event</button>
-          </form>
-          <% } %>
-          <% }) %>
         </h4>
-
 
         <h4><a><%=campground.name%></a></h4>
         <p>
@@ -47,7 +34,23 @@
         <p>Description:</p>
         <p><%- campground.description %></p>
         <div class="sharethis-inline-share-buttons"></div>
-        <div class="sharethis-inline-reaction-buttons"></div>
+        <div>
+          <% campground.bookings.forEach(function(hasil){ %>
+          <% if(currentUser._id.equals(hasil.id_user)) { %>
+          <p>Menunggu pembayaran</p>
+          <%= hasil.id_user %> <%= currentUser._id %>
+          <% } else { %>
+          <%= hasil.id_user %> <%= currentUser._id %>
+          <% if(!currentUser._id.equals(hasil.id_user)) { %>
+          <form action="/booking/<%= campground._id %>" method="POST">
+            <input type="hidden" value="<%= campground.id %>" name="id_campground">
+            <button class="btn btn-primary btn-sm">Booking Event</button>
+          </form>
+          <% } %>
+          <% } %>
+          <% }) %>
+
+        </div>
         <% if(currentUser && campground.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
         <div class="form-group">
           <a class="btn btn-xs btn-warning" href="/campground/<%= campground._id %>/edit">Edit</a>

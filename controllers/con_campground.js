@@ -136,10 +136,10 @@ exports.show_campground = middleware.asyncMiddleware(async (req, res, next) => {
         })
         .populate("categories")
         .populate({
-            path: "booking"
+            path: "bookings"
         });
-    // console.log(campground_slug[0].booking.id_user);
-    console.log(req.user.id);
+    // console.log(campground_slug[0].booking);
+    // console.log(req.user.id);
 
 
     res.render("v_campground/show", {

@@ -43,7 +43,7 @@
     "locus": "^2.0.1",
     "method-override": "^3.0.0",
     "moment": "^2.22.2",
-    "mongoose": "^5.3.9",
+    "mongoose": "^5.7.5",
     "morgan": "^1.9.1",
     "multer": "^1.4.1",
     "n": "^2.1.12",
